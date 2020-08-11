@@ -4,15 +4,15 @@
   "description": "Klasa: Croatian for 'class', is a class based remix on Komada.",
   "homepage": "https://klasa.js.org/",
   "bugs": {
-    "url": "https://github.com/dirigeants/klasa/issues"
+    "url": "https://github.com/PenguBot/klasa/issues"
   },
   "license": "MIT",
-  "author": "BDistin",
+  "author": "PenguBot",
   "main": "src/index.js",
   "types": "typings/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dirigeants/klasa.git"
+    "url": "https://github.com/PenguBot/klasa.git"
   },
   "scripts": {
     "lint": "npx eslint --fix src && npx eslint --fix --config .eslintrcmd.json --ext md guides && npx tslint --fix 'typings/*.ts'",
@@ -23,7 +23,7 @@
     "fs-nextra": "^0.4.7"
   },
   "peerDependencies": {
-    "discord.js": "github:discordjs/discord.js#master"
+    "discord.js": "^12.2.0"
   },
   "devDependencies": {
     "@types/node": "^13.13.5",
@@ -37,5 +37,6 @@
   },
   "engines": {
     "node": ">=10.1.0"
-  }
+  },
+  "private": true
 }
