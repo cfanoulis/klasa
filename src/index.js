@@ -15,15 +15,6 @@ module.exports = {
 	Schedule: require('./lib/schedule/Schedule'),
 	ScheduledTask: require('./lib/schedule/ScheduledTask'),
 
-	// lib/settings
-	Settings: require('./lib/settings/Settings'),
-	Gateway: require('./lib/settings/Gateway'),
-	GatewayDriver: require('./lib/settings/GatewayDriver'),
-	GatewayStorage: require('./lib/settings/GatewayStorage'),
-	Schema: require('./lib/settings/schema/Schema'),
-	SchemaFolder: require('./lib/settings/schema/SchemaFolder'),
-	SchemaPiece: require('./lib/settings/schema/SchemaPiece'),
-
 	// lib/structures/base
 	AliasPiece: require('./lib/structures/base/AliasPiece'),
 	AliasStore: require('./lib/structures/base/AliasStore'),
@@ -48,11 +39,6 @@ module.exports = {
 	Monitor: require('./lib/structures/Monitor'),
 	MonitorStore: require('./lib/structures/MonitorStore'),
 	MultiArgument: require('./lib/structures/MultiArgument'),
-	Provider: require('./lib/structures/Provider'),
-	ProviderStore: require('./lib/structures/ProviderStore'),
-	Serializer: require('./lib/structures/Serializer'),
-	SerializerStore: require('./lib/structures/SerializerStore'),
-	SQLProvider: require('./lib/structures/SQLProvider'),
 	Task: require('./lib/structures/Task'),
 	TaskStore: require('./lib/structures/TaskStore'),
 
@@ -84,6 +70,8 @@ module.exports = {
 	// version
 	version: require('../package').version
 };
+
+Object.assign(module.exports, require('@klasa/settings-gateway'));
 
 /**
  * @external Channel
