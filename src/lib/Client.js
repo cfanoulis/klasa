@@ -17,15 +17,7 @@ const FinalizerStore = require('./structures/FinalizerStore');
 const InhibitorStore = require('./structures/InhibitorStore');
 const LanguageStore = require('./structures/LanguageStore');
 const MonitorStore = require('./structures/MonitorStore');
-const ProviderStore = require('./structures/ProviderStore');
-const SerializerStore = require('./structures/SerializerStore');
 const TaskStore = require('./structures/TaskStore');
-
-// lib/settings
-const GatewayDriver = require('./settings/GatewayDriver');
-
-// lib/settings/schema
-const Schema = require('./settings/schema/Schema');
 
 // lib/util
 const KlasaConsole = require('./util/KlasaConsole');
@@ -137,6 +129,8 @@ class KlasaClient extends Discord.Client {
 		if (!util.isObject(options)) throw new TypeError('The Client Options for Klasa must be an object.');
 		options = util.mergeDefault(DEFAULTS.CLIENT, options);
 		super(options);
+
+		const { SerializerStore, ProviderStore, GatewayDriver } = require('@klasa/settings-gateway');
 
 		/**
 		 * The options the client was instantiated with.
@@ -257,30 +251,6 @@ class KlasaClient extends Discord.Client {
 		 */
 		this.gateways = new GatewayDriver(this);
 
-		const { guilds, users, clientStorage } = this.options.gateways;
-		const guildSchema = 'schema' in guilds ? guilds.schema : this.constructor.defaultGuildSchema;
-		const userSchema = 'schema' in users ? users.schema : this.constructor.defaultUserSchema;
-		const clientSchema = 'schema' in clientStorage ? clientStorage.schema : this.constructor.defaultClientSchema;
-
-		// Update Guild Schema with Keys needed in Klasa
-		const prefixKey = guildSchema.get('prefix');
-		if (!prefixKey || prefixKey.default === null) {
-			guildSchema.add('prefix', 'string', { array: Array.isArray(this.options.prefix), default: this.options.prefix });
-		}
-
-		const languageKey = guildSchema.get('language');
-		if (!languageKey || languageKey.default === null) {
-			guildSchema.add('language', 'language', { default: this.options.language });
-		}
-
-		guildSchema.add('disableNaturalPrefix', 'boolean', { configurable: Boolean(this.options.regexPrefix) });
-
-		// Register default gateways
-		this.gateways
-			.register('guilds', { ...guilds, schema: guildSchema })
-			.register('users', { ...users, schema: userSchema })
-			.register('clientStorage', { ...clientStorage, schema: clientSchema });
-
 		/**
 		 * The Settings instance that handles this client's settings
 		 * @since 0.5.0
@@ -330,6 +300,8 @@ class KlasaClient extends Discord.Client {
 		 * @type {RegExp}
 		 */
 		this.mentionPrefix = null;
+
+		this.constructor.registerGateways(this);
 
 		// Run all plugin functions in this context
 		for (const plugin of plugins) plugin.call(this);
@@ -486,9 +458,43 @@ class KlasaClient extends Discord.Client {
 		return this;
 	}
 
+	registerGateways(client) {
+		const { Gateway } = require('@klasa/settings-gateway');
+		const { guilds, users, clientStorage } = client.options.settings.gateways;
+		guilds.schema = 'schema' in guilds ? guilds.schema : client.constructor.defaultGuildSchema;
+		users.schema = 'schema' in users ? users.schema : client.constructor.defaultUserSchema;
+		clientStorage.schema = 'schema' in clientStorage ? clientStorage.schema : client.constructor.defaultClientSchema;
+
+		const language = guilds.schema.get('language');
+
+		const prefix = guilds.schema.get('prefix');
+		if (!prefix || prefix.default === null) {
+			guilds.schema.add('prefix', 'string', {
+				array: Array.isArray(client.options.prefix),
+				default: client.options.prefix
+			});
+		}
+
+		if (!language || language.default === null) {
+			guilds.schema.add('language', 'language', {
+				default: client.options.language
+			});
+		}
+
+		guilds.schema.add('disableNaturalPrefix', 'boolean', {
+			configurable: Boolean(client.options.regexPrefix)
+		});
+
+		client.gateways.register(new Gateway(client, 'guilds', guilds));
+		client.gateways.register(new Gateway(client, 'users', users));
+		client.gateways.register(new Gateway(client, 'clientStorage', clientStorage));
+	}
+
 }
 
 module.exports = KlasaClient;
+
+const { Schema } = require('@klasa/settings-gateway/dist/lib/schema/Schema');
 
 /**
  * The plugin symbol to be used in external packages

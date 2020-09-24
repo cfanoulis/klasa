@@ -20,6 +20,7 @@
     "docs": "npx dg --source src --custom guides/.docconfig.json --output dist/docs.json --logging"
   },
   "dependencies": {
+    "@klasa/settings-gateway": "github:skyra-project/settings-gateway",
     "fs-nextra": "^0.4.7"
   },
   "peerDependencies": {
