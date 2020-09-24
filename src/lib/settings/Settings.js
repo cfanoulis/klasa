@@ -102,14 +102,7 @@ class Settings {
 	 * @returns {*}
 	 */
 	get(path) {
-		const route = typeof path === 'string' ? path.split('.') : path;
-		const piece = this.gateway.schema.get(route);
-		if (!piece) return undefined;
-
-		let refThis = this; // eslint-disable-line consistent-this
-		for (const key of route) refThis = refThis[key];
-
-		return refThis;
+		return path.split('.').reduce((folder, key) => Map.prototype.get.call(folder, key), this);
 	}
 
 	/**
