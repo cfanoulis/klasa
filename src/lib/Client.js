@@ -494,7 +494,7 @@ class KlasaClient extends Discord.Client {
 
 module.exports = KlasaClient;
 
-const { Schema } = require('@klasa/settings-gateway/dist/lib/schema/Schema');
+const { Schema } = require('@klasa/settings-gateway');
 
 /**
  * The plugin symbol to be used in external packages
