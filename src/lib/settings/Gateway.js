@@ -32,7 +32,7 @@ class Gateway extends GatewayStorage {
 		 * @since 0.0.1
 		 * @type {external:Collection<string, Settings>|external:DataStore}
 		 */
-		this.cache = new Collection();
+		this.cache = (type in this.client) && this.client[type].cache instanceof Map ? this.client[type].cache : new Collection();
 
 		/**
 		 * The synchronization queue for all Settings instances
@@ -64,11 +64,17 @@ class Gateway extends GatewayStorage {
 	 * Get an entry from the cache.
 	 * @since 0.5.0
 	 * @param {string} id The key to get from the cache
+	 * @param {boolean} [create = false] Whether SG should create a new instance of Settings in the background, if the entry does not already exist.
 	 * @returns {?Settings}
 	 */
-	get(id) {
+	get(id, create = false) {
 		const entry = this.cache.get(id);
-		if (entry && entry.settings) return entry.settings;
+		if (entry) return entry.settings;
+		if (create) {
+			const settings = new this.Settings(this, { id });
+			if (this._synced && this.schema.size) settings.sync(true).catch(err => this.client.emit('error', err));
+			return settings;
+		}
 		return null;
 	}
 
