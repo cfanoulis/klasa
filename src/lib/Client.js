@@ -458,36 +458,33 @@ class KlasaClient extends Discord.Client {
 		return this;
 	}
 
-	registerGateways(client) {
+	static registerGateways(client) {
 		const { Gateway } = require('@klasa/settings-gateway');
-		const { guilds, users, clientStorage } = client.options.settings.gateways;
-		guilds.schema = 'schema' in guilds ? guilds.schema : client.constructor.defaultGuildSchema;
-		users.schema = 'schema' in users ? users.schema : client.constructor.defaultUserSchema;
-		clientStorage.schema = 'schema' in clientStorage ? clientStorage.schema : client.constructor.defaultClientSchema;
+		const { defaultClientSchema, defaultGuildSchema, defaultUserSchema } = client.options;
 
-		const language = guilds.schema.get('language');
+		const language = defaultGuildSchema.get('language');
 
-		const prefix = guilds.schema.get('prefix');
+		const prefix = defaultGuildSchema.get('prefix');
 		if (!prefix || prefix.default === null) {
-			guilds.schema.add('prefix', 'string', {
+			defaultGuildSchema.add('prefix', 'string', {
 				array: Array.isArray(client.options.prefix),
 				default: client.options.prefix
 			});
 		}
 
 		if (!language || language.default === null) {
-			guilds.schema.add('language', 'language', {
+			defaultGuildSchema.add('language', 'language', {
 				default: client.options.language
 			});
 		}
 
-		guilds.schema.add('disableNaturalPrefix', 'boolean', {
+		defaultGuildSchema.add('disableNaturalPrefix', 'boolean', {
 			configurable: Boolean(client.options.regexPrefix)
 		});
 
-		client.gateways.register(new Gateway(client, 'guilds', guilds));
-		client.gateways.register(new Gateway(client, 'users', users));
-		client.gateways.register(new Gateway(client, 'clientStorage', clientStorage));
+		client.gateways.register(new Gateway(client, 'guilds', defaultGuildSchema));
+		client.gateways.register(new Gateway(client, 'users', defaultUserSchema));
+		client.gateways.register(new Gateway(client, 'clientStorage', defaultClientSchema));
 	}
 
 }
