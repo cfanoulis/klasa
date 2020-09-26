@@ -482,9 +482,10 @@ class KlasaClient extends Discord.Client {
 			configurable: Boolean(client.options.regexPrefix)
 		});
 
-		client.gateways.register(new Gateway(client, 'guilds', defaultGuildSchema));
-		client.gateways.register(new Gateway(client, 'users', defaultUserSchema));
-		client.gateways.register(new Gateway(client, 'clientStorage', defaultClientSchema));
+		client.gateways
+			.register(new Gateway(client, 'guilds', defaultGuildSchema))
+			.register(new Gateway(client, 'users', defaultUserSchema))
+			.register(new Gateway(client, 'clientStorage', defaultClientSchema));
 	}
 
 }
