@@ -28,7 +28,7 @@ module.exports = class extends Event {
 
 		this.client.mentionPrefix = new RegExp(`^<@!?${this.client.user.id}>`);
 
-		this.client.settings = this.client.gateways.get('clientStorage').acquire(this.client.user.id);
+		this.client.settings = this.client.gateways.get('clientStorage').acquire(this, this.client.user.id);
 		await Promise.all(this.client.gateways.map((gateway) => gateway.sync()));
 
 		// Init all the pieces
