@@ -460,32 +460,36 @@ class KlasaClient extends Discord.Client {
 
 	static registerGateways(client) {
 		const { Gateway } = require('@klasa/settings-gateway');
-		const { defaultClientSchema, defaultGuildSchema, defaultUserSchema } = client.options;
 
-		const language = defaultGuildSchema.get('language');
+		const { guilds, users, clientStorage } = client.options.settings.gateways;
+		guilds.schema = 'schema' in guilds ? guilds.schema : client.constructor.defaultGuildSchema;
+		users.schema = 'schema' in users ? users.schema : client.constructor.defaultUserSchema;
+		clientStorage.schema = 'schema' in clientStorage ? clientStorage.schema : client.constructor.defaultClientSchema;
 
-		const prefix = defaultGuildSchema.get('prefix');
+		const language = guilds.get('language');
+
+		const prefix = guilds.get('prefix');
 		if (!prefix || prefix.default === null) {
-			defaultGuildSchema.add('prefix', 'string', {
+			guilds.add('prefix', 'string', {
 				array: Array.isArray(client.options.prefix),
 				default: client.options.prefix
 			});
 		}
 
 		if (!language || language.default === null) {
-			defaultGuildSchema.add('language', 'language', {
+			guilds.add('language', 'language', {
 				default: client.options.language
 			});
 		}
 
-		defaultGuildSchema.add('disableNaturalPrefix', 'boolean', {
+		guilds.add('disableNaturalPrefix', 'boolean', {
 			configurable: Boolean(client.options.regexPrefix)
 		});
 
 		client.gateways
-			.register(new Gateway(client, 'guilds', { schema: defaultGuildSchema }))
-			.register(new Gateway(client, 'users', { schema: defaultUserSchema }))
-			.register(new Gateway(client, 'clientStorage', { schema: defaultClientSchema }));
+			.register(new Gateway(client, 'guilds', { schema: guilds }))
+			.register(new Gateway(client, 'users', { schema: users }))
+			.register(new Gateway(client, 'clientStorage', { schema: clientStorage }));
 	}
 
 }
