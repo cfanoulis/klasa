@@ -29,9 +29,8 @@ const util = require('./util/util');
 const plugins = new Set();
 
 /**
- * The client for handling everything. See {@tutorial GettingStarted} for more information how to get started using this class.
+ * The client for handling everything. See for more information how to get started using this class.
  * @extends external:Client
- * @tutorial GettingStarted
  */
 class KlasaClient extends Discord.Client {
 
@@ -461,7 +460,7 @@ class KlasaClient extends Discord.Client {
 	static registerGateways(client) {
 		const { Gateway } = require('@klasa/settings-gateway');
 
-		const { guilds, users, clientStorage } = client.options.settings.gateways;
+		const { guilds, users, clientStorage } = client.options.gateways;
 		guilds.schema = 'schema' in guilds ? guilds.schema : client.constructor.defaultGuildSchema;
 		users.schema = 'schema' in users ? users.schema : client.constructor.defaultUserSchema;
 		clientStorage.schema = 'schema' in clientStorage ? clientStorage.schema : client.constructor.defaultClientSchema;
