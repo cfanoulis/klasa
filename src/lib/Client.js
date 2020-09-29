@@ -461,9 +461,9 @@ class KlasaClient extends Discord.Client {
 		const { Gateway } = require('@klasa/settings-gateway');
 
 		const { guilds, users, clientStorage } = client.options.gateways;
-		guilds.schema = 'schema' in guilds ? guilds.schema : client.constructor.defaultGuildSchema;
-		users.schema = 'schema' in users ? users.schema : client.constructor.defaultUserSchema;
-		clientStorage.schema = 'schema' in clientStorage ? clientStorage.schema : client.constructor.defaultClientSchema;
+		const defaultGuildSchema = guilds || client.options.defaultGuildSchema;
+		const defaultUserSchema = users || client.options.defaultUserSchema;
+		const defaultClientSchema = clientStorage || client.options.defaultClientSchema;
 
 		const language = guilds.get('language');
 
@@ -486,9 +486,9 @@ class KlasaClient extends Discord.Client {
 		});
 
 		client.gateways
-			.register(new Gateway(client, 'guilds', { schema: guilds }))
-			.register(new Gateway(client, 'users', { schema: users }))
-			.register(new Gateway(client, 'clientStorage', { schema: clientStorage }));
+			.register(new Gateway(client, 'guilds', { schema: defaultGuildSchema }))
+			.register(new Gateway(client, 'users', { schema: defaultUserSchema }))
+			.register(new Gateway(client, 'clientStorage', { schema: defaultClientSchema }));
 	}
 
 }
@@ -496,7 +496,6 @@ class KlasaClient extends Discord.Client {
 module.exports = KlasaClient;
 
 const { Schema } = require('@klasa/settings-gateway/dist/lib/schema/Schema');
-
 /**
  * The plugin symbol to be used in external packages
  * @since 0.5.0
