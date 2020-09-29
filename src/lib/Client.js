@@ -460,25 +460,28 @@ class KlasaClient extends Discord.Client {
 	static registerGateways(client) {
 		const { Gateway } = require('@klasa/settings-gateway');
 
-		const { defaultClientSchema, defaultGuildSchema, defaultUserSchema } = client.options;
+		const { guilds, users, clientStorage } = client.options.gateways;
+		const defaultGuildSchema = guilds || client.options.defaultGuildSchema;
+		const defaultUserSchema = users || client.options.defaultUserSchema;
+		const defaultClientSchema = clientStorage || client.options.defaultClientSchema;
 
-		const language = defaultGuildSchema.get('language');
+		const language = guilds.get('language');
 
-		const prefix = defaultGuildSchema.get('prefix');
+		const prefix = guilds.get('prefix');
 		if (!prefix || prefix.default === null) {
-			defaultGuildSchema.add('prefix', 'string', {
+			guilds.add('prefix', 'string', {
 				array: Array.isArray(client.options.prefix),
 				default: client.options.prefix
 			});
 		}
 
 		if (!language || language.default === null) {
-			defaultGuildSchema.add('language', 'language', {
+			guilds.add('language', 'language', {
 				default: client.options.language
 			});
 		}
 
-		defaultGuildSchema.add('disableNaturalPrefix', 'boolean', {
+		guilds.add('disableNaturalPrefix', 'boolean', {
 			configurable: Boolean(client.options.regexPrefix)
 		});
 
