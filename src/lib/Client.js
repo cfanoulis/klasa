@@ -461,27 +461,27 @@ class KlasaClient extends Discord.Client {
 		const { Gateway } = require('@klasa/settings-gateway');
 
 		const { guilds, users, clientStorage } = client.options.gateways;
-		const defaultGuildSchema = guilds || client.options.defaultGuildSchema;
-		const defaultUserSchema = users || client.options.defaultUserSchema;
-		const defaultClientSchema = clientStorage || client.options.defaultClientSchema;
+		const defaultGuildSchema = 'schema' in guilds ? guilds.schema : client.options.defaultGuildSchema;
+		const defaultUserSchema = 'schema' in users ? users.schema : client.options.defaultUserSchema;
+		const defaultClientSchema = 'schema' in clientStorage ? clientStorage.schema : client.options.defaultClientSchema;
 
-		const language = guilds.get('language');
+		const language = defaultGuildSchema.get('language');
 
-		const prefix = guilds.get('prefix');
+		const prefix = defaultGuildSchema.get('prefix');
 		if (!prefix || prefix.default === null) {
-			guilds.add('prefix', 'string', {
+			defaultGuildSchema.add('prefix', 'string', {
 				array: Array.isArray(client.options.prefix),
 				default: client.options.prefix
 			});
 		}
 
 		if (!language || language.default === null) {
-			guilds.add('language', 'language', {
+			defaultGuildSchema.add('language', 'language', {
 				default: client.options.language
 			});
 		}
 
-		guilds.add('disableNaturalPrefix', 'boolean', {
+		defaultGuildSchema.add('disableNaturalPrefix', 'boolean', {
 			configurable: Boolean(client.options.regexPrefix)
 		});
 
