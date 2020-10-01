@@ -29,7 +29,7 @@ declare module 'klasa' {
 		StringResolvable,
 		TextChannel,
 		User,
-		UserStore
+		UserManager
 	} from 'discord.js';
 
 	import {
@@ -452,7 +452,7 @@ declare module 'klasa' {
 
 	export class TaskStore extends Store<string, Task, typeof Task> { }
 
-	export class KlasaUserStore extends UserStore { }
+	export class KlasaMemberManager extends UserManager { }
 
 //#endregion Stores
 
@@ -1368,7 +1368,7 @@ declare module 'klasa' {
 			options: Required<KlasaClientOptions>;
 			userBaseDirectory: string;
 			console: KlasaConsole;
-			users: KlasaUserStore;
+			users: KlasaMemberManager;
 			arguments: ArgumentStore;
 			commands: CommandStore;
 			inhibitors: InhibitorStore;
