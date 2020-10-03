@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@klasa/settings-gateway": "github:skyra-project/settings-gateway#build",
+    "discord.js": "^12.3.1",
     "fs-nextra": "^0.4.7"
   },
   "peerDependencies": {
