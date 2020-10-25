@@ -2,7 +2,7 @@
   "name": "@pengubot/klasa",
   "version": "1.0.0",
   "description": "Klasa modular Discord bot framework for Discord.js.",
-  "homepage": "https://klasa.js.org/",
+  "homepage": "https://github.com/PenguBot/klasa",
   "bugs": {
     "url": "https://github.com/PenguBot/klasa/issues"
   },
@@ -41,5 +41,8 @@
   "engines": {
     "node": ">=10.1.0"
   },
-  "private": false
+  "private": false,
+  "publishConfig": {
+		"access": "public"
+	}
 }
