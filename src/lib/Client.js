@@ -461,9 +461,9 @@ class KlasaClient extends Discord.Client {
 		const { Gateway } = require('@klasa/settings-gateway');
 
 		const { guilds, users, clientStorage } = client.options.gateways;
-		const defaultGuildSchema = 'schema' in guilds ? guilds.schema : client.options.defaultGuildSchema;
-		const defaultUserSchema = 'schema' in users ? users.schema : client.options.defaultUserSchema;
-		const defaultClientSchema = 'schema' in clientStorage ? clientStorage.schema : client.options.defaultClientSchema;
+		const defaultGuildSchema = 'schema' in guilds ? guilds.schema : client.constructor.defaultGuildSchema;
+		const defaultUserSchema = 'schema' in users ? users.schema : client.constructor.defaultUserSchema;
+		const defaultClientSchema = 'schema' in clientStorage ? clientStorage.schema : client.constructor.defaultClientSchema;
 
 		const language = defaultGuildSchema.get('language');
 
