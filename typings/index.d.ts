@@ -1,6 +1,6 @@
 /// <reference types="node" />
 
-declare module 'klasa' {
+declare module '@pengubot/klasa' {
 
 	import { ExecOptions } from 'child_process';
 
