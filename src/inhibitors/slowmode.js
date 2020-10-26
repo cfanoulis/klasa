@@ -1,4 +1,4 @@
-const { Inhibitor, RateLimitManager } = require('klasa');
+const { Inhibitor, RateLimitManager } = require('@pengubot/klasa');
 
 module.exports = class extends Inhibitor {
 

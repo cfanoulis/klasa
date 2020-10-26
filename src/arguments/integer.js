@@ -1,4 +1,4 @@
-const { Argument } = require('klasa');
+const { Argument } = require('@pengubot/klasa');
 
 module.exports = class extends Argument {
 

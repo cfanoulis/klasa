@@ -1,4 +1,4 @@
-const { Extendable } = require('klasa');
+const { Extendable } = require('@pengubot/klasa');
 const { TextChannel, DMChannel, User, APIMessage } = require('discord.js');
 
 module.exports = class extends Extendable {

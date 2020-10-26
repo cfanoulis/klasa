@@ -1,4 +1,4 @@
-const { Serializer } = require('klasa');
+const { Serializer } = require('@pengubot/klasa');
 
 module.exports = class extends Serializer {
 

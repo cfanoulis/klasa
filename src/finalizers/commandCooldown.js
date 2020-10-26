@@ -1,4 +1,4 @@
-const { Finalizer, RateLimitManager } = require('klasa');
+const { Finalizer, RateLimitManager } = require('@pengubot/klasa');
 
 module.exports = class extends Finalizer {
 

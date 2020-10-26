@@ -1,4 +1,4 @@
-const { Command, Schema, util: { toTitleCase, codeBlock } } = require('klasa');
+const { Command, Schema, util: { toTitleCase, codeBlock } } = require('@pengubot/klasa');
 
 module.exports = class extends Command {
 

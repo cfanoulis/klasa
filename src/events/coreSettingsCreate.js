@@ -1,4 +1,4 @@
-const { Event } = require('klasa');
+const { Event } = require('@pengubot/klasa');
 const gateways = ['users', 'clientStorage'];
 
 module.exports = class extends Event {

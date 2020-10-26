@@ -1,4 +1,4 @@
-const { MultiArgument } = require('klasa');
+const { MultiArgument } = require('@pengubot/klasa');
 
 module.exports = class extends MultiArgument {
 
