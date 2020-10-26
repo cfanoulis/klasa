@@ -1,4 +1,4 @@
-const { Command } = require('@pengubot/klasa');
+const { Command } = require('klasa');
 
 module.exports = class extends Command {
 

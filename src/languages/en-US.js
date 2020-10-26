@@ -1,4 +1,4 @@
-const { Language, util } = require('@pengubot/klasa');
+const { Language, util } = require('klasa');
 
 module.exports = class extends Language {
 

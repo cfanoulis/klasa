@@ -1,4 +1,4 @@
-const { Inhibitor } = require('@pengubot/klasa');
+const { Inhibitor } = require('klasa');
 
 module.exports = class extends Inhibitor {
 

@@ -1,4 +1,4 @@
-const { Command, Store, Stopwatch } = require('@pengubot/klasa');
+const { Command, Store, Stopwatch } = require('klasa');
 
 module.exports = class extends Command {
 

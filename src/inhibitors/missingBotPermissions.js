@@ -1,4 +1,4 @@
-const { Inhibitor, util } = require('@pengubot/klasa');
+const { Inhibitor, util } = require('klasa');
 const { Permissions, Permissions: { FLAGS } } = require('discord.js');
 
 module.exports = class extends Inhibitor {

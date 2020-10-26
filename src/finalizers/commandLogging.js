@@ -1,4 +1,4 @@
-const { Finalizer, Colors } = require('@pengubot/klasa');
+const { Finalizer, Colors } = require('klasa');
 
 module.exports = class extends Finalizer {
 

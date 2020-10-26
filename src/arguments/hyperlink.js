@@ -1,5 +1,5 @@
 const { parse } = require('url');
-const { Argument } = require('@pengubot/klasa');
+const { Argument } = require('klasa');
 
 module.exports = class extends Argument {
 

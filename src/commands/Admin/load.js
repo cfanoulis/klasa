@@ -1,4 +1,4 @@
-const { Command, Stopwatch } = require('@pengubot/klasa');
+const { Command, Stopwatch } = require('klasa');
 const { pathExists } = require('fs-nextra');
 const { join } = require('path');
 

@@ -1,4 +1,4 @@
-const { Provider, util } = require('@pengubot/klasa');
+const { Provider, util } = require('klasa');
 const { resolve } = require('path');
 const fs = require('fs-nextra');
 

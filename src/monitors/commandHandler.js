@@ -1,4 +1,4 @@
-const { Monitor, Stopwatch } = require('@pengubot/klasa');
+const { Monitor, Stopwatch } = require('klasa');
 
 module.exports = class extends Monitor {
 

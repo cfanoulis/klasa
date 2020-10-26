@@ -1,4 +1,4 @@
-const { Event, util } = require('@pengubot/klasa');
+const { Event, util } = require('klasa');
 const { Team } = require('discord.js');
 let retries = 0;
 

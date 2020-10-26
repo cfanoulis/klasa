@@ -1,4 +1,4 @@
-const { Serializer } = require('@pengubot/klasa');
+const { Serializer } = require('klasa');
 const URL = require('url');
 
 module.exports = class extends Serializer {

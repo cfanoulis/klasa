@@ -1,4 +1,4 @@
-const { Event } = require('@pengubot/klasa');
+const { Event } = require('klasa');
 
 module.exports = class extends Event {
 
