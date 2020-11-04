@@ -257,10 +257,9 @@ module.exports = Structures.extend('Message', Message => {
 		 * @since 0.5.0
 		 * @param {*} data The data passed from the original constructor
 		 * @private
-		 * @returns {*}
 		 */
 		_patch(data) {
-			const patch = super.patch(data);
+			super._patch(data);
 
 			/**
 			 * The language in this setting
@@ -277,7 +276,6 @@ module.exports = Structures.extend('Message', Message => {
 			this.guildSettings = this.guild ? this.guild.settings : this.client.gateways.get('guilds').schema.defaults;
 
 			this._parseCommand();
-			return patch;
 		}
 
 		/**
