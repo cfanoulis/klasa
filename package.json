@@ -3,25 +3,13 @@
   "version": "0.5.0",
   "description": "Klasa: Croatian for 'class', is a class based remix on Komada.",
   "homepage": "https://klasa.js.org/",
-  "bugs": {
-    "url": "https://github.com/PenguBot/klasa/issues"
-  },
   "license": "MIT",
-  "author": "PenguBot",
+  "author": "@dirigeants",
   "main": "src/index.js",
   "types": "typings/index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/PenguBot/klasa.git"
-  },
-  "scripts": {
-    "lint": "npx eslint --fix src && npx eslint --fix --config .eslintrcmd.json --ext md guides && npx tslint --fix 'typings/*.ts'",
-    "test:lint": "npx eslint src && npx tslint 'typings/*.ts' && npx eslint --config .eslintrcmd.json --ext md guides && npx markdownlint guides README.md",
-    "docs": "jsdoc -c jsdoc.conf.json"
-  },
   "dependencies": {
     "@klasa/settings-gateway": "github:skyra-project/settings-gateway#build",
-    "discord.js": "^12.4.1",
+    "discord.js": "^12.5.1",
     "fs-nextra": "^0.4.7"
   },
   "peerDependencies": {
@@ -40,6 +28,5 @@
   },
   "engines": {
     "node": ">=10.1.0"
-  },
-  "private": true
+  }
 }
