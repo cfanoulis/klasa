@@ -464,7 +464,7 @@ class KlasaClient extends Discord.Client {
 			defaultGuildSchema,
 			defaultUserSchema,
 			defaultClientSchema
-		} = client.constructor.defaultClientSchema;
+		} = client.constructor;
 
 		const language = defaultGuildSchema.get('language');
 
